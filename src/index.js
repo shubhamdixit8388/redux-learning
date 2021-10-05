@@ -10,7 +10,7 @@ store.subscribe(() => {
 
 store.dispatch(actions.addBug({ description: "Bug 1" }));
 store.dispatch(actions.resolveBug({ id: 1 }));
-store.dispatch(actions.resolveBug({ id: 1 }));
+store.dispatch(actions.updateBug({ id: 1 }));
 store.dispatch(actions.removeBug({ id: 1 }));
 
 console.log(store.getState());
