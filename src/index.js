@@ -18,6 +18,8 @@ const store = configureStore();
 // );
 store.dispatch(loadBugs());
 
+setTimeout(() => store.dispatch(loadBugs()), 2000);
+
 // import customStore from "./store/custom-store";
 // import {
 //   addBug,
