@@ -107,7 +107,7 @@ export const assignBugToUser = (bugId, userId) =>
     onSuccess: bugAssigned.type,
   });
 
-export const {
+const {
   bugAdded,
   bugRemoved,
   bugResolved,
