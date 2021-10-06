@@ -15,17 +15,25 @@ const slice = createSlice({
       });
     },
 
-    removeBug: (state, action) => {
-      return state.filter((bug) => bug.id !== action.payload.id);
+    removeBug: (bugs, action) => {
+      return bugs.filter((bug) => bug.id !== action.payload.id);
     },
 
-    resolveBug: (state, action) => {
-      const index = state.findIndex((bug) => bug.id === action.payload.id);
-      state[index].isResolved = true;
+    resolveBug: (bugs, action) => {
+      const index = bugs.findIndex((bug) => bug.id === action.payload.id);
+      bugs[index].isResolved = true;
     },
 
-    updateBug: (state, action) => {
-      return [...state];
+    assignBug: (bugs, action) => {
+      const { userId, bugId } = action.payload;
+      const index = bugs.findIndex((bug) => bug.id === bugId);
+      if (index >= 0) {
+        bugs[index].userId = userId;
+      }
+    },
+
+    updateBug: (bugs, action) => {
+      return [...bugs];
     },
   },
 });
@@ -36,5 +44,12 @@ export const getUnresolvedBugs = createSelector(
   (bugs, projects) => bugs.filter((bug) => !bug.isResolved)
 );
 
-export const { addBug, removeBug, resolveBug, updateBug } = slice.actions;
+export const getBugForUser = (userId) =>
+  createSelector(
+    (state) => state.entities.bugs,
+    (bugs, projects) => bugs.filter((bug) => bug.userId === userId)
+  );
+
+export const { addBug, removeBug, resolveBug, assignBug, updateBug } =
+  slice.actions;
 export default slice.reducer;
