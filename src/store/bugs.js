@@ -44,6 +44,15 @@ const slice = createSlice({
 
     bugRecieved: (bugs, action) => {
       bugs.list = action.payload;
+      bugs.loading = false;
+    },
+
+    bugsRequested: (bugs, action) => {
+      bugs.loading = true;
+    },
+
+    bugsRequestFailed: (bugs, action) => {
+      bugs.loading = false;
     },
   },
 });
@@ -65,6 +74,8 @@ const url = "/bugs";
 export const loadBugs = () =>
   apiCallBegan({
     url,
+    onStart: bugsRequested.type,
+    onError: bugsRequestFailed.type,
     onSuccess: bugRecieved.type,
   });
 
@@ -75,5 +86,7 @@ export const {
   assignBug,
   updateBug,
   bugRecieved,
+  bugsRequested,
+  bugsRequestFailed,
 } = slice.actions;
 export default slice.reducer;
