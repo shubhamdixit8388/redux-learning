@@ -53,6 +53,8 @@ store.dispatch((dispatch, getState) => {
   // when the promise is rejected => dispatch()
 });
 
+store.dispatch({ type: "error", payload: { message: "We got a message" } });
+
 // CUSTOM STORE
 // customStore.subscribe(() => {
 //   console.log("Custom Store Changed:", customStore.getState());
