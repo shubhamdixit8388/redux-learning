@@ -6,6 +6,6 @@ import func from "./middleware/func";
 export default function () {
   return configureStore({
     reducer,
-    middleware: [...getDefaultMiddleware, logger("development"), func],
+    middleware: [...getDefaultMiddleware(), logger("development")],
   });
 }
