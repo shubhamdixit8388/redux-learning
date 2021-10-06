@@ -1,5 +1,5 @@
 import configureStore from "./store/configure-store";
-import { loadBugs, addBug, resolveBug } from "./store/bugs";
+import { loadBugs, addBug, resolveBug, assignBugToUser } from "./store/bugs";
 
 const store = configureStore();
 
@@ -22,7 +22,7 @@ store.dispatch(loadBugs());
 
 // store.dispatch(addBug({ description: "New bug" }));
 
-setTimeout(() => store.dispatch(resolveBug(2)), 2000);
+setTimeout(() => store.dispatch(assignBugToUser(4, 2)), 2000);
 
 // import customStore from "./store/custom-store";
 // import {
