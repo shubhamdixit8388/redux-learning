@@ -25,7 +25,9 @@ store.dispatch(updateBug({ id: 1 }));
 store.dispatch(removeBug({ id: 1 }));
 
 console.log(store.getState());
-console.log("Unresolved", getUnresolvedBugs(store.getState()));
+const x = getUnresolvedBugs(store.getState());
+const y = getUnresolvedBugs(store.getState());
+console.log("Unresolved", x === y);
 
 // CUSTOM STORE
 // customStore.subscribe(() => {
