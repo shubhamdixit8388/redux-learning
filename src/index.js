@@ -1,5 +1,5 @@
 import configureStore from "./store/configure-store";
-import * as actions from "./store/api";
+import { loadBugs } from "./store/bugs";
 
 const store = configureStore();
 
@@ -10,12 +10,13 @@ const store = configureStore();
 //   },
 // });
 
-store.dispatch(
-  actions.apiCallBegan({
-    url: "/bugs",
-    onSuccess: "bugRecieved",
-  })
-);
+// store.dispatch(
+//   actions.apiCallBegan({
+//     url: "/bugs",
+//     onSuccess: "bugs/bugRecieved",
+//   })
+// );
+store.dispatch(loadBugs());
 
 // import customStore from "./store/custom-store";
 // import {
