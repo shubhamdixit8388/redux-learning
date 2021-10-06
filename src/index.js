@@ -43,13 +43,13 @@ store.dispatch(
 // // // Add Project
 // // store.dispatch(addProject({ name: "Project 1" }));
 
-// // // Bug operations
-// // store.dispatch(addBug({ description: "Bug 1" }));
-// // store.dispatch(addBug({ description: "Bug 2" }));
-// // store.dispatch(addBug({ description: "Bug 3" }));
-// // store.dispatch(resolveBug({ id: 3 }));
-// // store.dispatch(updateBug({ id: 1 }));
-// // store.dispatch(removeBug({ id: 1 }));
+// // Bug operations
+// store.dispatch(addBug({ description: "Bug 1" }));
+// store.dispatch(addBug({ description: "Bug 2" }));
+// store.dispatch(addBug({ description: "Bug 3" }));
+// store.dispatch(resolveBug({ id: 3 }));
+// store.dispatch(updateBug({ id: 1 }));
+// store.dispatch(removeBug({ id: 1 }));
 
 // // Assign bug to user
 // // store.dispatch(assignBug({ bugId: 2, userId: 2 }));
