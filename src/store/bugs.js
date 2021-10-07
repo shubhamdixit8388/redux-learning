@@ -91,6 +91,17 @@ export const addBug = (bug) =>
     onSuccess: bugAdded.type,
   });
 
+// Optional/Changed implementation addBug for testing
+// export const addBug = (bug) => async (dispatch) => {
+//   const response = await axios.request({
+//     baseURL: "http://localhost:9001/api",
+//     url: url,
+//     method: "post",
+//     data: bug,
+//   });
+//   dispatch(bugAdded(response.data));
+// };
+
 export const resolveBug = (id) =>
   apiCallBegan({
     url: url + "/" + id,
