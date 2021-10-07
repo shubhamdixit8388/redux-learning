@@ -45,8 +45,28 @@ describe("bugSlice", () => {
     expect(bugSlice().list).toHaveLength(0);
   });
 
+  it("should mark the bug as resolved if it is saved to server", async () => {
+    fakeAxios.onPost("/bugs").reply(200, { id: 1 });
+    fakeAxios.onPatch("/bugs/1").reply(200, { id: 1, isResolved: true });
+
+    await store.dispatch(addBug({}));
+    await store.dispatch(resolveBug(1));
+
+    expect(bugSlice().list[0].isResolved).toBe(true);
+  });
+
+  it("should not mark the bug as resolved if it is not saved to server", async () => {
+    fakeAxios.onPost("/bugs").reply(200, { id: 1 });
+    fakeAxios.onPatch("/bugs/1").reply(500);
+
+    await store.dispatch(addBug({}));
+    await store.dispatch(resolveBug(1));
+
+    expect(bugSlice().list[0].isResolved).not.toBe(true);
+  });
+
   describe("selectors", () => {
-    it("get unresolved bugs", async () => {
+    it("get unresolved bugs", () => {
       const state = createState();
       state.entities.bugs.list = [
         { id: 1, isResolved: true },
