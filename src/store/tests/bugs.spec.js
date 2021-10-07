@@ -1,7 +1,8 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { addBug } from "../bugs";
+import { addBug, resolveBug } from "../bugs";
 import configureStore from "../configure-store";
+import { getUnresolvedBugs } from "./../bugs";
 
 describe("bugSlice", () => {
   let fakeAxios;
@@ -13,6 +14,14 @@ describe("bugSlice", () => {
   });
 
   const bugSlice = () => store.getState().entities.bugs;
+
+  const createState = () => ({
+    entities: {
+      bugs: {
+        list: [],
+      },
+    },
+  });
 
   it("should add the bug to store if it stored to server", async () => {
     // Arrange
@@ -34,5 +43,20 @@ describe("bugSlice", () => {
     await store.dispatch(addBug(bug));
 
     expect(bugSlice().list).toHaveLength(0);
+  });
+
+  describe("selectors", () => {
+    it("get unresolved bugs", async () => {
+      const state = createState();
+      state.entities.bugs.list = [
+        { id: 1, isResolved: true },
+        { id: 2 },
+        { id: 2 },
+      ];
+
+      const result = getUnresolvedBugs(state);
+
+      expect(result).toHaveLength(2);
+    });
   });
 });
